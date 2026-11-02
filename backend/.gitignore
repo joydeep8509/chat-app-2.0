@@ -47,9 +47,9 @@ replay_pid*
 HELP.md
 .mvn/wrapper/maven-wrapper.jar
 
-# ==========================================
-# Application Configuration & Secrets
-# ==========================================
-src/main/resources/application.properties
-src/main/resources/application-*.properties
-application.properties
+## ==========================================
+## Application Configuration & Secrets
+## ==========================================
+#src/main/resources/application.properties
+#src/main/resources/application-*.properties
+#application.properties
