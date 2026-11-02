@@ -5,7 +5,8 @@ import { Client } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import { ChatMessage } from '@/types';
 
-const WS_URL = process.env.NEXT_PUBLIC_WS_URL || '/chat';
+const BACKEND = (process.env.NEXT_PUBLIC_BACKEND_URL || process.env.NEXT_PUBLIC_API_URL || '').replace(/\/$/, '');
+const WS_URL = process.env.NEXT_PUBLIC_WS_URL || (BACKEND ? `${BACKEND}/chat` : '/chat');
 
 export function useChatSocket(
   enabled: boolean,
@@ -24,7 +25,6 @@ export function useChatSocket(
       reconnectDelay: 5000,
       onConnect: () => {
         setIsConnected(true);
-
         client.subscribe('/topic/messages', (msg) => {
           try {
             onMessageReceived(JSON.parse(msg.body));
@@ -32,7 +32,6 @@ export function useChatSocket(
             console.error('Failed to parse incoming message', e);
           }
         });
-
         client.subscribe('/topic/messages/delete', (msg) => {
           try {
             const data = JSON.parse(msg.body);
