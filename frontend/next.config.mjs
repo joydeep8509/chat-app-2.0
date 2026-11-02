@@ -5,19 +5,19 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'http://localhost:8080/api/:path*',
+        destination: `${process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8080'}/api/:path*`,
       },
       {
         source: '/uploads/:path*',
-        destination: 'http://localhost:8080/uploads/:path*',
+        destination: `${process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8080'}/uploads/:path*`,
       },
       {
         source: '/chat/:path*',
-        destination: 'http://localhost:8080/chat/:path*',
+        destination: `${process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8080'}/chat/:path*`,
       },
       {
         source: '/chat',
-        destination: 'http://localhost:8080/chat',
+        destination: `${process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8080'}/chat`,
       },
     ];
   },
@@ -27,6 +27,11 @@ const nextConfig = {
         protocol: 'http',
         hostname: 'localhost',
         port: '8080',
+        pathname: '/uploads/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'joydeep-chat-app.up.railway.app',
         pathname: '/uploads/**',
       },
       {
